@@ -24,8 +24,8 @@
 #  Authentication  #
 ####################
 #In this case you should use an Intune administrator
-Connect-MgGraph -ForceRefresh -Scopes "DeviceManagementManagedDevices.Read.All", "DeviceManagementManagedDevices.ReadWrite.All", "DeviceManagementApps.Read.All", "DeviceManagementApps.ReadWrite.All"
-
+#Connect-MgGraph -ForceRefresh -Scopes "DeviceManagementManagedDevices.Read.All", "DeviceManagementManagedDevices.ReadWrite.All", "DeviceManagementApps.Read.All", "DeviceManagementApps.ReadWrite.All"
+Connect-MgGraph -ForceRefresh -Scopes "DeviceManagementApps.Read.All"
 
 ###############
 #  Functions  #
@@ -37,7 +37,7 @@ Function Get-httprequest(){
     )
     try{
         $graphApiVersion = "Beta"
-        $Resource = "/deviceAppManagement/managedAppStatuses('appregistrationsummary')?fetch=6000&policyMode=0&columns=DisplayName,UserEmail,ApplicationName,ApplicationInstanceId,ApplicationVersion,DeviceName,DeviceType,DeviceManufacturer,DeviceModel,AndroidPatchVersion,AzureADDeviceId,MDMDeviceID,Platform,PlatformVersion,ManagementLevel,PolicyName,LastCheckInDate"
+        $Resource = "/deviceAppManagement/managedAppStatuses('appregistrationsummary')?fetch=6000&policyMode=0&columns=AccountId,UserId,DisplayName,UserEmail,IntuneLicensed,ApplicationId,ApplicationVersion,SdkVersion,ApplicationName,ApplicationInstanceId,CreatedDate,LastCheckInDate,Platform,PlatformVersion,DeviceId,DeviceType,DeviceName,DeviceHealth,DeviceModel,DeviceManufacturer,AndroidPatchVersion,AzureADDeviceId,MDMDeviceID,ManagementLevel,PolicySource,PolicyId,PolicyName,PolicyDescription,ComplianceState"
         if ($NextPage -ne "" -and $NextPage -ne $null) {
             $Resource += "&seek=$NextPage"
         }
